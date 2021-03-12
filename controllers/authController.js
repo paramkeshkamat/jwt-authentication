@@ -74,7 +74,10 @@ const login = async (req, res) => {
       process.env.JWT_SECRET,
       { expriesIn: 3 * 24 * 60 * 60 }
     );
-    res.cookie("token", token, { httpOnly: true });
+    res.cookie("token", token, { 
+      httpOnly: true,
+      maxAge: 3 * 24 * 60 * 60 * 1000,
+    });
     res.status(200).send("Successfully logged in!");
   } catch (err) {
     res.status(500).json({ message: err.message });
